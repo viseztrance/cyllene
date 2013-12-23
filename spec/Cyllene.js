@@ -74,4 +74,22 @@ describe("Cyllene", function() {
             });
         });
     });
+
+    describe("helper", function() {
+        beforeEach(function() {
+            Cyllene.helpers.capitalize = function(text) {
+                return text.charAt(0).toUpperCase() + text.slice(1);
+            };
+        });
+
+        afterEach(function() {
+            delete Cyllene.helpers.capitalize;
+        });
+
+        it("is applied within the template", function() {
+            var template = new Cyllene("Welcome back {{ capitalize(name) }}.");
+            var locals = { name: "daniel" };
+            expect(template.render(locals)).toEqual("Welcome back Daniel.");
+        });
+    });
 });
