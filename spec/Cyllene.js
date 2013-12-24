@@ -1,4 +1,10 @@
 describe("Cyllene", function() {
+    it("can render text over multiple lines", function() {
+        var text = "hello \nworld";
+        var template = new Cyllene(text);
+        expect(template.render({})).toEqual("hello world");
+    });
+
     describe("variable substitution", function() {
         it("replaces placeholders with assigned values", function() {
             var template = new Cyllene("Good evening, {{name}}. {{message}}.");
